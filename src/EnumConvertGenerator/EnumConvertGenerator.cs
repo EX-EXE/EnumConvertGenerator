@@ -244,7 +244,7 @@ internal sealed class EnumFromAttribute{{types}}: Attribute
                         foreach (var enumFromList in enumMember.FromList.Where(x => x.EqualsType(uniqueTypeFromParameterArrayInfo)))
                         {
                             sourceCondition.AppendLine($$"""
-        if({{string.Join(" && ", enumFromList.Parameters.Select(x => $"{x.Type.ToName(false)}.Equals({x.Value})"))}})
+        if({{string.Join(" && ", enumFromList.Parameters.Select(x => $"{x.Type.ToName(false)} == {x.Value}"))}})
         {
             return {{enumMember.NameSpace}};
         }
