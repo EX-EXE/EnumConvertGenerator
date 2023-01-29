@@ -31,7 +31,7 @@ public partial class EnumConvertGenerator : IIncrementalGenerator
             static (node, token) => true,
             static (context, token) => context);
 
-        // 出力コード部分はちょっとごちゃつくので別メソッドに隔離
+        // ソース生成
         context.RegisterSourceOutput(source, GenerateSource);
     }
 
