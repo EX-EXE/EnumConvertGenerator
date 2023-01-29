@@ -1,4 +1,4 @@
-using EnumConvertSample;
+Ôªøusing EnumConvertSample;
 
 namespace EnumConvertGenerator
 {
@@ -22,9 +22,9 @@ namespace EnumConvertGenerator
             Assert.True("Four_D".ToSampleEnum() == SampleEnum.Four_D);
 
             Assert.True("2".ToSampleEnum() == SampleEnum.Two_B);
-            Assert.True("ìÒ".ToSampleEnum() == SampleEnum.Two_B);
-            Assert.True("áU".ToSampleEnum() == SampleEnum.Two_B);
-            Assert.True("ìÛ".ToSampleEnum() == SampleEnum.Two_B);
+            Assert.True("‰∫å".ToSampleEnum() == SampleEnum.Two_B);
+            Assert.True("‚Ö°".ToSampleEnum() == SampleEnum.Two_B);
+            Assert.True("Âºê".ToSampleEnum() == SampleEnum.Two_B);
         }
 
         [Fact]
