@@ -2,7 +2,18 @@
 Provides extension methods around enum conversion using source generation.
 
 ## How To Use
-ToDo
+### Install by nuget
+PM> Install-Package [EnumConvertGenerator](https://www.nuget.org/packages/EnumConvertGenerator/)
+
+## Attribute
+| Attribute | Description | Generate Extension Methods |
+|---|---|---|
+|[EnumConvertGenerator]| | TargetEnum ToTargetEnum(this int type) <br/> TargetEnum ToTargetEnum(this string name) <br/> string ToName(this TargetEnum type) <br/> int ToValue(this TargetEnum type) |
+|[EnumTo]| | ConvertType ToConvertType(this TargetEnum type) |
+|[EnumFrom]| | TargetEnum ToTargetEnum(this ConvertType1 type1, ConvertType2 type2)  <br/>  TargetEnum ToTargetEnum(this ConvertType2 type2, ConvertType1 type1)  | 
+|[EnumName]|  | | 
+|[EnumAlias]| | |
+|[EnumIgnore]| | |
 
 ## Sample
 
