@@ -3,14 +3,6 @@ using EnumConvertGenerator;
 
 namespace EnumConvertSample
 {
-    public class Test
-    {
-        public Test()
-        {
-
-        }
-    }
-
     [EnumConvertGenerator]
     public enum GroupEnumType
     {

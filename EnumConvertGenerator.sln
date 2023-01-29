@@ -5,9 +5,13 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C2499638-9A38-4616-BFB8-E27B1551691B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumConvertGenerator", "src\EnumConvertGenerator\EnumConvertGenerator.csproj", "{AE15FF2B-42F2-4348-85D7-A9A7CDE4F049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumConvertGenerator", "src\EnumConvertGenerator\EnumConvertGenerator.csproj", "{AE15FF2B-42F2-4348-85D7-A9A7CDE4F049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumConvertSample", "src\EnumConvertSample\EnumConvertSample.csproj", "{B54331EA-B23C-4131-9687-5444348549FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumConvertSample", "src\EnumConvertSample\EnumConvertSample.csproj", "{B54331EA-B23C-4131-9687-5444348549FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D408F827-0917-4AFE-B0EF-A72B3E7645AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumConvertGenerator", "test\EnumConvertGenerator\EnumConvertGenerator.csproj", "{961EC1BC-F567-475A-954C-728E0D885CA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,10 @@ Global
 		{B54331EA-B23C-4131-9687-5444348549FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B54331EA-B23C-4131-9687-5444348549FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B54331EA-B23C-4131-9687-5444348549FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{961EC1BC-F567-475A-954C-728E0D885CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{961EC1BC-F567-475A-954C-728E0D885CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{961EC1BC-F567-475A-954C-728E0D885CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{961EC1BC-F567-475A-954C-728E0D885CA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AE15FF2B-42F2-4348-85D7-A9A7CDE4F049} = {C2499638-9A38-4616-BFB8-E27B1551691B}
 		{B54331EA-B23C-4131-9687-5444348549FF} = {C2499638-9A38-4616-BFB8-E27B1551691B}
+		{961EC1BC-F567-475A-954C-728E0D885CA8} = {D408F827-0917-4AFE-B0EF-A72B3E7645AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65A76B36-1C97-4AFE-9C07-FC967862BD28}
