@@ -8,12 +8,12 @@ PM> Install-Package [EnumConvertGenerator](https://www.nuget.org/packages/EnumCo
 ## Attribute
 | Attribute | Description | Generate Extension Methods |
 |---|---|---|
-|[EnumConvertGenerator]| | TargetEnum ToTargetEnum(this int type) <br/> TargetEnum ToTargetEnum(this string name) <br/> string ToName(this TargetEnum type) <br/> int ToValue(this TargetEnum type) |
-|[EnumTo]| | ConvertType ToConvertType(this TargetEnum type) |
-|[EnumFrom]| | TargetEnum ToTargetEnum(this ConvertType1 type1, ConvertType2 type2)  <br/>  TargetEnum ToTargetEnum(this ConvertType2 type2, ConvertType1 type1)  | 
-|[EnumName]|  | | 
-|[EnumAlias]| | |
-|[EnumIgnore]| | |
+|[EnumConvertGenerator]| Attribute can be added to Enum.<br/>  | TargetEnum ToTargetEnum(this int type) <br/> TargetEnum ToTargetEnum(this string name) <br/> string ToName(this TargetEnum type) <br/> int ToValue(this TargetEnum type) |
+|[EnumTo]| Attribute can be added to Enum member. <br/> Convert to another class. | ConvertType ToConvertType(this TargetEnum type) |
+|[EnumFrom]| Attribute can be added to Enum member.<br/> Convert from another class.  | TargetEnum ToTargetEnum(this ConvertType1 type1, ConvertType2 type2)  <br/>  TargetEnum ToTargetEnum(this ConvertType2 type2, ConvertType1 type1)  | 
+|[EnumName]| Attribute can be added to Enum member. <br/> Replace the name.| | 
+|[EnumAlias]| Attribute can be added to Enum member.<br/> Convert from a string. | |
+|[EnumIgnore]| Attribute can be added to Enum member. <br/> Disable source generation.  | |
 
 ## Sample
 
