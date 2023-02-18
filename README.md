@@ -19,7 +19,7 @@ PM> Install-Package [EnumConvertGenerator](https://www.nuget.org/packages/EnumCo
 ## Sample
 
 ### Code
-```
+```csharp
 public enum AlphabetEnumType
 {
     A, B, C, D,
@@ -67,7 +67,7 @@ public enum SampleEnum
 ```
 
 ### Generate
-```
+```csharp
 public static partial class SampleEnumExtensions
 {
     public static SampleEnum ToSampleEnum(this int type)
