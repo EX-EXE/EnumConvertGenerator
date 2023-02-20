@@ -1,4 +1,4 @@
-[![NuGet version](https://badge.fury.io/nu/TextImageGenerator.svg)](https://badge.fury.io/nu/EnumConvertGenerator)
+[![NuGet version](https://badge.fury.io/nu/EnumConvertGenerator.svg)](https://badge.fury.io/nu/EnumConvertGenerator)
 # EnumConvertGenerator
 Provides extension methods around enum conversion using source generation.
 
