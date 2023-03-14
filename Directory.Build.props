@@ -10,5 +10,6 @@
     <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Provides extension methods around enum conversion using source generation.</Description>
   </PropertyGroup>
 </Project>
