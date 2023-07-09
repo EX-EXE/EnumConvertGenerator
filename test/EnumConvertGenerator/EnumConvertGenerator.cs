@@ -1,4 +1,5 @@
 ﻿using EnumConvertSample;
+using System.Linq;
 
 namespace EnumConvertGenerator
 {
@@ -68,6 +69,18 @@ namespace EnumConvertGenerator
             Assert.True(SampleEnum.Two_B.ToName() == "Two&B");
             Assert.True(SampleEnum.Three_C.ToName() == "Three C");
             Assert.True(SampleEnum.Four_D.ToName() == "Four_D");
+        }
+
+        [Fact]
+        public void ToAlias()
+        {
+            Assert.True(SampleEnum.Two_B.ToAlias() == "2");
+        }
+
+        [Fact]
+        public void ToAliases()
+        {
+            Assert.True(SampleEnum.Two_B.ToAliases().Except(new string[] { "2", "二", "Ⅱ", "弐" }).Count() == 0);
         }
 
         [Fact]
