@@ -156,8 +156,8 @@ using System;
             {
                 var types = $"<{string.Join(",", Enumerable.Range(0, num).Select(x => $"T{x}"))}>";
                 var typeValues = string.Join(",", Enumerable.Range(0, num).Select(x => $"T{x} value{x}"));
-                var properties = string.Join("\n\t", Enumerable.Range(0, num).Select(x => $"public T{x} Value{x} {{ get; private set; }} = default;"));
-                var init = string.Join("\n\t\t", Enumerable.Range(0, num).Select(x => $"Value{x} = value{x};"));
+                var properties = string.Join($"{Environment.NewLine}\t", Enumerable.Range(0, num).Select(x => $"public T{x} Value{x} {{ get; private set; }} = default;"));
+                var init = string.Join($"{Environment.NewLine}\t\t", Enumerable.Range(0, num).Select(x => $"Value{x} = value{x};"));
                 sourceEnumString.AppendLine($$"""
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
 internal sealed class EnumFromAttribute{{types}}: Attribute
@@ -303,7 +303,7 @@ internal sealed class EnumFromAttribute{{types}}: Attribute
     public static {{typeSymbol.Name}} To{{typeSymbol.Name}}(this {{funcParams}})
     {
 {{sourceCondition}}
-        throw new ArgumentException();
+        throw new ArgumentException($"Invalid parameter.");
     }
 
 """);
@@ -343,7 +343,7 @@ internal sealed class EnumFromAttribute{{types}}: Attribute
         return type switch
         {
 {{sourceCase}}
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeName}})"),
         };
     }
 
@@ -375,8 +375,8 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join("\n", enumMemberList.Select(x => $"\t\t\t{x.Value} => {x.NameSpace},"))}}
-            _ => throw new ArgumentException(type.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.Value} => {x.NameSpace},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
 
@@ -385,10 +385,10 @@ public static partial class {{typeSymbol.Name}}Extensions
         return name switch
         {
             // Name
-{{string.Join("\n", enumMemberList.Select(x => $"\t\t\t{x.Name} => {x.NameSpace},"))}}
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.Name} => {x.NameSpace},"))}}
             // Alias
-{{string.Join("\n", enumMemberList.SelectMany(x => x.Aliases.DefaultIfEmpty(), (item, value) => (item.NameSpace, value)).Where(x => !string.IsNullOrEmpty(x.value)).Select(x => $"\t\t\t{x.value} => {x.NameSpace},"))}}
-            _ => throw new ArgumentException(name.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.SelectMany(x => x.Aliases.DefaultIfEmpty(), (item, value) => (item.NameSpace, value)).Where(x => !string.IsNullOrEmpty(x.value)).Select(x => $"\t\t\t{x.value} => {x.NameSpace},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {name}({{typeSymbol.Name}})"),
         };
     }
 
@@ -396,8 +396,8 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join("\n", enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.Name},"))}}
-            _ => throw new ArgumentException(type.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.Name},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
 
@@ -405,8 +405,8 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join("\n", enumMemberList.Where(x => 0 < x.Aliases.Count).Select(x => $"\t\t\t{x.NameSpace} => {x.Aliases[0]},"))}}
-            _ => throw new ArgumentException(type.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.Where(x => 0 < x.Aliases.Count).Select(x => $"\t\t\t{x.NameSpace} => {x.Aliases[0]},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
 
@@ -414,8 +414,8 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join("\n", enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => new string[]{{ {string.Join(", ", x.Aliases)} }},"))}}
-            _ => throw new ArgumentException(type.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => new string[]{{ {string.Join(", ", x.Aliases)} }},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
 
@@ -423,8 +423,8 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join("\n", enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.Value},"))}}
-            _ => throw new ArgumentException(type.ToString()),
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.Value},"))}}
+            _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
 
