@@ -24,16 +24,16 @@ using EnumConvertGenerator;
 public enum NumberEnumType
 {
     [EnumName("EnumOne")]
-    [EnumAlias("1")]
+    [EnumAlias("Alias1")]
     One = 1,
     [EnumName("EnumTwo")]
-    [EnumAlias("2")]
+    [EnumAlias("Alias2")]
     Two,
     [EnumName("EnumThree")]
-    [EnumAlias("3")]
+    [EnumAlias("Alias3")]
     Three,
     [EnumName("EnumFour")]
-    [EnumAlias("4")]
+    [EnumAlias("Alias4")]
     Four,
 }
 ```
@@ -66,10 +66,10 @@ public static partial class NumberEnumTypeExtensions
 			"EnumThree" => EnumConvertSample.NumberEnumType.Three,
 			"EnumFour" => EnumConvertSample.NumberEnumType.Four,
             // Alias
-			"1" => EnumConvertSample.NumberEnumType.One,
-			"2" => EnumConvertSample.NumberEnumType.Two,
-			"3" => EnumConvertSample.NumberEnumType.Three,
-			"4" => EnumConvertSample.NumberEnumType.Four,
+			"Alias1" => EnumConvertSample.NumberEnumType.One,
+			"Alias2" => EnumConvertSample.NumberEnumType.Two,
+			"Alias3" => EnumConvertSample.NumberEnumType.Three,
+			"Alias4" => EnumConvertSample.NumberEnumType.Four,
             _ => throw new ArgumentException($"Invalid parameter. : {name}(NumberEnumType)"),
         };
     }
@@ -90,10 +90,10 @@ public static partial class NumberEnumTypeExtensions
     {
         return type switch
         {
-			EnumConvertSample.NumberEnumType.One => "1",
-			EnumConvertSample.NumberEnumType.Two => "2",
-			EnumConvertSample.NumberEnumType.Three => "3",
-			EnumConvertSample.NumberEnumType.Four => "4",
+			EnumConvertSample.NumberEnumType.One => "Alias1",
+			EnumConvertSample.NumberEnumType.Two => "Alias2",
+			EnumConvertSample.NumberEnumType.Three => "Alias3",
+			EnumConvertSample.NumberEnumType.Four => "Alias4",
             _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
         };
     }
@@ -102,10 +102,10 @@ public static partial class NumberEnumTypeExtensions
     {
         return type switch
         {
-			EnumConvertSample.NumberEnumType.One => new string[]{ "1" },
-			EnumConvertSample.NumberEnumType.Two => new string[]{ "2" },
-			EnumConvertSample.NumberEnumType.Three => new string[]{ "3" },
-			EnumConvertSample.NumberEnumType.Four => new string[]{ "4" },
+			EnumConvertSample.NumberEnumType.One => new string[]{ "Alias1" },
+			EnumConvertSample.NumberEnumType.Two => new string[]{ "Alias2" },
+			EnumConvertSample.NumberEnumType.Three => new string[]{ "Alias3" },
+			EnumConvertSample.NumberEnumType.Four => new string[]{ "Alias4" },
             _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
         };
     }
