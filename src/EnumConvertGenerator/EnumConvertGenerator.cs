@@ -197,7 +197,8 @@ internal sealed class EnumFromAttribute{{types}}: Attribute
             var membernInfo = new EnumMemberInfo();
             var memberName = enumMember.Identifier.ValueText;
             membernInfo.NameSpace = $"{enumNamespace}.{memberName}";
-            membernInfo.Name = $"\"{memberName}\"";
+            membernInfo.MemberName = memberName;
+            membernInfo.EnumName = $"\"{memberName}\"";
             foreach (var (attributeSyntex, attributeSymbolInfo) in attributes)
             {
                 // GeneratorAttributeを取得
@@ -206,7 +207,7 @@ internal sealed class EnumFromAttribute{{types}}: Attribute
                 var parameters = AnalyzeUtility.GetParameters(attributeSyntex, attributeSymbolInfo).ToArray();
                 if (type == EnumNameAttribute)
                 {
-                    membernInfo.Name = parameters.First().Value;
+                    membernInfo.EnumName = parameters.First().Value;
                 }
                 else if (type == EnumAliasAttribute)
                 {
@@ -385,7 +386,7 @@ public static partial class {{typeSymbol.Name}}Extensions
         return name switch
         {
             // Name
-{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.Name} => {x.NameSpace},"))}}
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.EnumName} => {x.NameSpace},"))}}
             // Alias
 {{string.Join(Environment.NewLine, enumMemberList.SelectMany(x => x.Aliases.DefaultIfEmpty(), (item, value) => (item.NameSpace, value)).Where(x => !string.IsNullOrEmpty(x.value)).Select(x => $"\t\t\t{x.value} => {x.NameSpace},"))}}
             _ => throw new ArgumentException($"Invalid parameter. : {name}({{typeSymbol.Name}})"),
@@ -396,7 +397,7 @@ public static partial class {{typeSymbol.Name}}Extensions
     {
         return type switch
         {
-{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.Name},"))}}
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => {x.EnumName},"))}}
             _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
@@ -410,11 +411,12 @@ public static partial class {{typeSymbol.Name}}Extensions
         };
     }
 
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\tprivate static readonly string[] ___{x.MemberName}_Aliases = {{ {string.Join(", ", x.Aliases)} }};"))}}
     public static string[] ToAliases(this {{typeSymbol.Name}} type)
     {
         return type switch
         {
-{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => new string[]{{ {string.Join(", ", x.Aliases)} }},"))}}
+{{string.Join(Environment.NewLine, enumMemberList.Select(x => $"\t\t\t{x.NameSpace} => ___{x.MemberName}_Aliases,"))}}
             _ => throw new ArgumentException($"Invalid parameter. : {type}({{typeSymbol.Name}})"),
         };
     }
@@ -473,7 +475,8 @@ public static partial class {{typeSymbol.Name}}Extensions
 
     public class EnumMemberInfo
     {
-        public string Name { get; set; } = string.Empty;
+        public string MemberName { get; set; } = string.Empty;
+        public string EnumName { get; set; } = string.Empty;
         public string NameSpace { get; set; } = string.Empty;
         public int? Value { get; set; } = null;
         public List<string> Aliases { get; set; } = new List<string>();

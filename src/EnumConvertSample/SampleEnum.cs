@@ -16,12 +16,6 @@ namespace EnumConvertSample
     }
 
     [EnumConvertGenerator]
-    public enum NumberEnumType
-    {
-        One, Two, Three, Four,
-    }
-
-    [EnumConvertGenerator]
     public enum SampleEnum
     {
         [EnumName("One And A")]
