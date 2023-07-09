@@ -16,7 +16,7 @@ namespace EnumConvertSample
     }
 
     [EnumConvertGenerator]
-    public enum NemberEnumType
+    public enum NumberEnumType
     {
         One, Two, Three, Four,
     }
@@ -25,24 +25,24 @@ namespace EnumConvertSample
     public enum SampleEnum
     {
         [EnumName("One And A")]
-        [EnumTo<NemberEnumType>(NemberEnumType.One)]
+        [EnumTo<NumberEnumType>(NumberEnumType.One)]
         [EnumTo<AlphabetEnumType>(AlphabetEnumType.A)]
-        [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.One, AlphabetEnumType.A)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.One, AlphabetEnumType.A)]
         [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.A)]
         One_A = 100,
 
         [EnumName("Two&B")]
         [EnumAlias("2", "二", "Ⅱ", "弐")]
-        [EnumTo<NemberEnumType>(NemberEnumType.Two)]
+        [EnumTo<NumberEnumType>(NumberEnumType.Two)]
         [EnumTo<AlphabetEnumType>(AlphabetEnumType.B)]
-        [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.Two, AlphabetEnumType.B)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.Two, AlphabetEnumType.B)]
         [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.B)]
         Two_B,
 
         [EnumName("Three C")]
-        [EnumTo<NemberEnumType>(NemberEnumType.Three)]
+        [EnumTo<NumberEnumType>(NumberEnumType.Three)]
         [EnumTo<AlphabetEnumType>(AlphabetEnumType.C)]
-        [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.Three, AlphabetEnumType.C)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.Three, AlphabetEnumType.C)]
         [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupB, AlphabetEnumType.C)]
         Three_C,
 

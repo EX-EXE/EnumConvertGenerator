@@ -30,17 +30,17 @@ namespace EnumConvertGenerator
         [Fact]
         public void ToSampleEnum3()
         {
-            Assert.True(NemberEnumType.One.ToSampleEnum(AlphabetEnumType.A) == SampleEnum.One_A);
-            Assert.True(NemberEnumType.Two.ToSampleEnum(AlphabetEnumType.B) == SampleEnum.Two_B);
-            Assert.True(NemberEnumType.Three.ToSampleEnum(AlphabetEnumType.C) == SampleEnum.Three_C);
+            Assert.True(NumberEnumType.One.ToSampleEnum(AlphabetEnumType.A) == SampleEnum.One_A);
+            Assert.True(NumberEnumType.Two.ToSampleEnum(AlphabetEnumType.B) == SampleEnum.Two_B);
+            Assert.True(NumberEnumType.Three.ToSampleEnum(AlphabetEnumType.C) == SampleEnum.Three_C);
         }
 
         [Fact]
         public void ToSampleEnum4()
         {
-            Assert.True(AlphabetEnumType.A.ToSampleEnum(NemberEnumType.One) == SampleEnum.One_A);
-            Assert.True(AlphabetEnumType.B.ToSampleEnum(NemberEnumType.Two) == SampleEnum.Two_B);
-            Assert.True(AlphabetEnumType.C.ToSampleEnum(NemberEnumType.Three) == SampleEnum.Three_C);
+            Assert.True(AlphabetEnumType.A.ToSampleEnum(NumberEnumType.One) == SampleEnum.One_A);
+            Assert.True(AlphabetEnumType.B.ToSampleEnum(NumberEnumType.Two) == SampleEnum.Two_B);
+            Assert.True(AlphabetEnumType.C.ToSampleEnum(NumberEnumType.Three) == SampleEnum.Three_C);
         }
 
         [Fact]
@@ -80,11 +80,11 @@ namespace EnumConvertGenerator
         }
 
         [Fact]
-        public void ToNemberEnumType1()
+        public void ToNumberEnumType1()
         {
-            Assert.True(SampleEnum.One_A.ToNemberEnumType() == NemberEnumType.One);
-            Assert.True(SampleEnum.Two_B.ToNemberEnumType() == NemberEnumType.Two);
-            Assert.True(SampleEnum.Three_C.ToNemberEnumType() == NemberEnumType.Three);
+            Assert.True(SampleEnum.One_A.ToNumberEnumType() == NumberEnumType.One);
+            Assert.True(SampleEnum.Two_B.ToNumberEnumType() == NumberEnumType.Two);
+            Assert.True(SampleEnum.Three_C.ToNumberEnumType() == NumberEnumType.Three);
         }
 
         [Fact]
