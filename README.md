@@ -16,9 +16,116 @@ PM> Install-Package [EnumConvertGenerator](https://www.nuget.org/packages/EnumCo
 |[EnumAlias]| Attribute can be added to Enum member.<br/> Convert from a string. | |
 |[EnumIgnore]| Attribute can be added to Enum member. <br/> Disable source generation.  | |
 
-## Sample
+## Sample1
+### Source Code
+```csharp
+using EnumConvertGenerator;
+[EnumConvertGenerator]
+public enum NumberEnumType
+{
+    [EnumName("EnumOne")]
+    [EnumAlias("1")]
+    One = 1,
+    [EnumName("EnumTwo")]
+    [EnumAlias("2")]
+    Two,
+    [EnumName("EnumThree")]
+    [EnumAlias("3")]
+    Three,
+    [EnumName("EnumFour")]
+    [EnumAlias("4")]
+    Four,
+}
+```
+### Generate Code
+```csharp
+public static partial class NumberEnumTypeExtensions
+{
+    public static readonly NumberEnumType[] GetNumberEnumTypeArray
+        = new NumberEnumType[]{ EnumConvertSample.NumberEnumType.One, EnumConvertSample.NumberEnumType.Two, EnumConvertSample.NumberEnumType.Three, EnumConvertSample.NumberEnumType.Four };
 
-### Code
+    public static NumberEnumType ToNumberEnumType(this int type)
+    {
+        return type switch
+        {
+			1 => EnumConvertSample.NumberEnumType.One,
+			2 => EnumConvertSample.NumberEnumType.Two,
+			3 => EnumConvertSample.NumberEnumType.Three,
+			4 => EnumConvertSample.NumberEnumType.Four,
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
+        };
+    }
+
+    public static NumberEnumType ToNumberEnumType(this string name)
+    {
+        return name switch
+        {
+            // Name
+			"EnumOne" => EnumConvertSample.NumberEnumType.One,
+			"EnumTwo" => EnumConvertSample.NumberEnumType.Two,
+			"EnumThree" => EnumConvertSample.NumberEnumType.Three,
+			"EnumFour" => EnumConvertSample.NumberEnumType.Four,
+            // Alias
+			"1" => EnumConvertSample.NumberEnumType.One,
+			"2" => EnumConvertSample.NumberEnumType.Two,
+			"3" => EnumConvertSample.NumberEnumType.Three,
+			"4" => EnumConvertSample.NumberEnumType.Four,
+            _ => throw new ArgumentException($"Invalid parameter. : {name}(NumberEnumType)"),
+        };
+    }
+
+    public static string ToName(this NumberEnumType type)
+    {
+        return type switch
+        {
+			EnumConvertSample.NumberEnumType.One => "EnumOne",
+			EnumConvertSample.NumberEnumType.Two => "EnumTwo",
+			EnumConvertSample.NumberEnumType.Three => "EnumThree",
+			EnumConvertSample.NumberEnumType.Four => "EnumFour",
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
+        };
+    }
+
+    public static string ToAlias(this NumberEnumType type)
+    {
+        return type switch
+        {
+			EnumConvertSample.NumberEnumType.One => "1",
+			EnumConvertSample.NumberEnumType.Two => "2",
+			EnumConvertSample.NumberEnumType.Three => "3",
+			EnumConvertSample.NumberEnumType.Four => "4",
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
+        };
+    }
+
+    public static string[] ToAliases(this NumberEnumType type)
+    {
+        return type switch
+        {
+			EnumConvertSample.NumberEnumType.One => new string[]{ "1" },
+			EnumConvertSample.NumberEnumType.Two => new string[]{ "2" },
+			EnumConvertSample.NumberEnumType.Three => new string[]{ "3" },
+			EnumConvertSample.NumberEnumType.Four => new string[]{ "4" },
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
+        };
+    }
+
+    public static int ToValue(this NumberEnumType type)
+    {
+        return type switch
+        {
+			EnumConvertSample.NumberEnumType.One => 1,
+			EnumConvertSample.NumberEnumType.Two => 2,
+			EnumConvertSample.NumberEnumType.Three => 3,
+			EnumConvertSample.NumberEnumType.Four => 4,
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
+        };
+    }
+}
+```
+
+## Sample2
+### Source Code
 ```csharp
 using System;
 using EnumConvertGenerator;
@@ -77,7 +184,7 @@ namespace EnumConvertSample
 }
 ```
 
-### Generate
+### Generate Code
 ```csharp
 public static partial class SampleEnumExtensions
 {
