@@ -20,49 +20,60 @@ PM> Install-Package [EnumConvertGenerator](https://www.nuget.org/packages/EnumCo
 
 ### Code
 ```csharp
-public enum AlphabetEnumType
+using System;
+using EnumConvertGenerator;
+
+namespace EnumConvertSample
 {
-    A, B, C, D,
-}
-public enum NemberEnumType
-{
-    One, Two, Three, Four,
-}
-public enum GroupEnumType
-{
-    GroupA, GroupB
-}
+    [EnumConvertGenerator]
+    public enum GroupEnumType
+    {
+        GroupA, GroupB
+    }
 
-[EnumConvertGenerator]
-public enum SampleEnum
-{
-    [EnumName("One And A")]
-    [EnumTo<NemberEnumType>(NemberEnumType.One)]
-    [EnumTo<AlphabetEnumType>(AlphabetEnumType.A)]
-    [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.One, AlphabetEnumType.A)]
-    [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.A)]
-    One_A = 100,
+    [EnumConvertGenerator]
+    public enum AlphabetEnumType
+    {
+        A, B, C, D,
+    }
 
-    [EnumName("Two&B")]
-    [EnumAlias("2", "二", "Ⅱ", "弐")]
-    [EnumTo<NemberEnumType>(NemberEnumType.Two)]
-    [EnumTo<AlphabetEnumType>(AlphabetEnumType.B)]
-    [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.Two, AlphabetEnumType.B)]
-    [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.B)]
-    Two_B,
+    [EnumConvertGenerator]
+    public enum NumberEnumType
+    {
+        One, Two, Three, Four,
+    }
 
-    [EnumName("Three C")]
-    [EnumTo<NemberEnumType>(NemberEnumType.Three)]
-    [EnumTo<AlphabetEnumType>(AlphabetEnumType.C)]
-    [EnumFrom<NemberEnumType, AlphabetEnumType>(NemberEnumType.Three, AlphabetEnumType.C)]
-    [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupB, AlphabetEnumType.C)]
-    Three_C,
+    [EnumConvertGenerator]
+    public enum SampleEnum
+    {
+        [EnumName("One And A")]
+        [EnumTo<NumberEnumType>(NumberEnumType.One)]
+        [EnumTo<AlphabetEnumType>(AlphabetEnumType.A)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.One, AlphabetEnumType.A)]
+        [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.A)]
+        One_A = 100,
 
-    [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupB, AlphabetEnumType.D)]
-    Four_D,
+        [EnumName("Two&B")]
+        [EnumAlias("2", "二", "Ⅱ", "弐")]
+        [EnumTo<NumberEnumType>(NumberEnumType.Two)]
+        [EnumTo<AlphabetEnumType>(AlphabetEnumType.B)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.Two, AlphabetEnumType.B)]
+        [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupA, AlphabetEnumType.B)]
+        Two_B,
 
-    [EnumIgnore]
-    Ignore,
+        [EnumName("Three C")]
+        [EnumTo<NumberEnumType>(NumberEnumType.Three)]
+        [EnumTo<AlphabetEnumType>(AlphabetEnumType.C)]
+        [EnumFrom<NumberEnumType, AlphabetEnumType>(NumberEnumType.Three, AlphabetEnumType.C)]
+        [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupB, AlphabetEnumType.C)]
+        Three_C,
+
+        [EnumFrom<GroupEnumType, AlphabetEnumType>(GroupEnumType.GroupB, AlphabetEnumType.D)]
+        Four_D,
+
+        [EnumIgnore]
+        Ignore,
+    }
 }
 ```
 
@@ -70,6 +81,9 @@ public enum SampleEnum
 ```csharp
 public static partial class SampleEnumExtensions
 {
+    public static readonly SampleEnum[] GetSampleEnumArray
+        = new SampleEnum[]{ EnumConvertSample.SampleEnum.One_A, EnumConvertSample.SampleEnum.Two_B, EnumConvertSample.SampleEnum.Three_C, EnumConvertSample.SampleEnum.Four_D };
+
     public static SampleEnum ToSampleEnum(this int type)
     {
         return type switch
@@ -78,7 +92,7 @@ public static partial class SampleEnumExtensions
 			101 => EnumConvertSample.SampleEnum.Two_B,
 			102 => EnumConvertSample.SampleEnum.Three_C,
 			103 => EnumConvertSample.SampleEnum.Four_D,
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
         };
     }
 
@@ -96,7 +110,7 @@ public static partial class SampleEnumExtensions
 			"二" => EnumConvertSample.SampleEnum.Two_B,
 			"Ⅱ" => EnumConvertSample.SampleEnum.Two_B,
 			"弐" => EnumConvertSample.SampleEnum.Two_B,
-            _ => throw new ArgumentException(name.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {name}(SampleEnum)"),
         };
     }
 
@@ -108,7 +122,28 @@ public static partial class SampleEnumExtensions
 			EnumConvertSample.SampleEnum.Two_B => "Two&B",
 			EnumConvertSample.SampleEnum.Three_C => "Three C",
 			EnumConvertSample.SampleEnum.Four_D => "Four_D",
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
+        };
+    }
+
+    public static string ToAlias(this SampleEnum type)
+    {
+        return type switch
+        {
+			EnumConvertSample.SampleEnum.Two_B => "2",
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
+        };
+    }
+
+    public static string[] ToAliases(this SampleEnum type)
+    {
+        return type switch
+        {
+			EnumConvertSample.SampleEnum.One_A => new string[]{  },
+			EnumConvertSample.SampleEnum.Two_B => new string[]{ "2", "二", "Ⅱ", "弐" },
+			EnumConvertSample.SampleEnum.Three_C => new string[]{  },
+			EnumConvertSample.SampleEnum.Four_D => new string[]{  },
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
         };
     }
 
@@ -120,30 +155,30 @@ public static partial class SampleEnumExtensions
 			EnumConvertSample.SampleEnum.Two_B => 101,
 			EnumConvertSample.SampleEnum.Three_C => 102,
 			EnumConvertSample.SampleEnum.Four_D => 103,
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
         };
     }
 
-    public static SampleEnum ToSampleEnum(this EnumConvertSample.NemberEnumType nemberEnumType, EnumConvertSample.AlphabetEnumType alphabetEnumType)
+    public static SampleEnum ToSampleEnum(this EnumConvertSample.NumberEnumType numberEnumType, EnumConvertSample.AlphabetEnumType alphabetEnumType)
     {
-        if(nemberEnumType == NemberEnumType.One && alphabetEnumType == AlphabetEnumType.A)
+        if(numberEnumType == NumberEnumType.One && alphabetEnumType == AlphabetEnumType.A)
         {
             return EnumConvertSample.SampleEnum.One_A;
         }
-        if(nemberEnumType == NemberEnumType.Two && alphabetEnumType == AlphabetEnumType.B)
+        if(numberEnumType == NumberEnumType.Two && alphabetEnumType == AlphabetEnumType.B)
         {
             return EnumConvertSample.SampleEnum.Two_B;
         }
-        if(nemberEnumType == NemberEnumType.Three && alphabetEnumType == AlphabetEnumType.C)
+        if(numberEnumType == NumberEnumType.Three && alphabetEnumType == AlphabetEnumType.C)
         {
             return EnumConvertSample.SampleEnum.Three_C;
         }
 
-        throw new ArgumentException();
+        throw new ArgumentException($"Invalid parameter.");
     }
 
-    public static SampleEnum ToSampleEnum(this EnumConvertSample.AlphabetEnumType alphabetEnumType, EnumConvertSample.NemberEnumType nemberEnumType)
-        => ToSampleEnum(nemberEnumType,alphabetEnumType);
+    public static SampleEnum ToSampleEnum(this EnumConvertSample.AlphabetEnumType alphabetEnumType, EnumConvertSample.NumberEnumType numberEnumType)
+        => ToSampleEnum(numberEnumType,alphabetEnumType);
 
     public static SampleEnum ToSampleEnum(this EnumConvertSample.GroupEnumType groupEnumType, EnumConvertSample.AlphabetEnumType alphabetEnumType)
     {
@@ -164,21 +199,21 @@ public static partial class SampleEnumExtensions
             return EnumConvertSample.SampleEnum.Four_D;
         }
 
-        throw new ArgumentException();
+        throw new ArgumentException($"Invalid parameter.");
     }
 
     public static SampleEnum ToSampleEnum(this EnumConvertSample.AlphabetEnumType alphabetEnumType, EnumConvertSample.GroupEnumType groupEnumType)
         => ToSampleEnum(groupEnumType,alphabetEnumType);
 
-    public static EnumConvertSample.NemberEnumType ToNemberEnumType(this SampleEnum type)
+    public static EnumConvertSample.NumberEnumType ToNumberEnumType(this SampleEnum type)
     {
         return type switch
         {
-			EnumConvertSample.SampleEnum.One_A => NemberEnumType.One,
-			EnumConvertSample.SampleEnum.Two_B => NemberEnumType.Two,
-			EnumConvertSample.SampleEnum.Three_C => NemberEnumType.Three,
+			EnumConvertSample.SampleEnum.One_A => NumberEnumType.One,
+			EnumConvertSample.SampleEnum.Two_B => NumberEnumType.Two,
+			EnumConvertSample.SampleEnum.Three_C => NumberEnumType.Three,
 
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
         };
     }
 
@@ -190,7 +225,7 @@ public static partial class SampleEnumExtensions
 			EnumConvertSample.SampleEnum.Two_B => AlphabetEnumType.B,
 			EnumConvertSample.SampleEnum.Three_C => AlphabetEnumType.C,
 
-            _ => throw new ArgumentException(type.ToString()),
+            _ => throw new ArgumentException($"Invalid parameter. : {type}(AlphabetEnumType)"),
         };
     }
 }
