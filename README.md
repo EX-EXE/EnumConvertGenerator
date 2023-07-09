@@ -41,7 +41,7 @@ public enum NumberEnumType
 ```csharp
 public static partial class NumberEnumTypeExtensions
 {
-    public static readonly NumberEnumType[] GetNumberEnumTypeArray
+   public static readonly NumberEnumType[] GetNumberEnumTypeArray
         = new NumberEnumType[]{ EnumConvertSample.NumberEnumType.One, EnumConvertSample.NumberEnumType.Two, EnumConvertSample.NumberEnumType.Three, EnumConvertSample.NumberEnumType.Four };
 
     public static NumberEnumType ToNumberEnumType(this int type)
@@ -98,14 +98,18 @@ public static partial class NumberEnumTypeExtensions
         };
     }
 
+	private static readonly string[] ___One_Aliases = { "Alias1" };
+	private static readonly string[] ___Two_Aliases = { "Alias2" };
+	private static readonly string[] ___Three_Aliases = { "Alias3" };
+	private static readonly string[] ___Four_Aliases = { "Alias4" };
     public static string[] ToAliases(this NumberEnumType type)
     {
         return type switch
         {
-			EnumConvertSample.NumberEnumType.One => new string[]{ "Alias1" },
-			EnumConvertSample.NumberEnumType.Two => new string[]{ "Alias2" },
-			EnumConvertSample.NumberEnumType.Three => new string[]{ "Alias3" },
-			EnumConvertSample.NumberEnumType.Four => new string[]{ "Alias4" },
+			EnumConvertSample.NumberEnumType.One => ___One_Aliases,
+			EnumConvertSample.NumberEnumType.Two => ___Two_Aliases,
+			EnumConvertSample.NumberEnumType.Three => ___Three_Aliases,
+			EnumConvertSample.NumberEnumType.Four => ___Four_Aliases,
             _ => throw new ArgumentException($"Invalid parameter. : {type}(NumberEnumType)"),
         };
     }
@@ -188,7 +192,7 @@ namespace EnumConvertSample
 ```csharp
 public static partial class SampleEnumExtensions
 {
-    public static readonly SampleEnum[] GetSampleEnumArray
+   public static readonly SampleEnum[] GetSampleEnumArray
         = new SampleEnum[]{ EnumConvertSample.SampleEnum.One_A, EnumConvertSample.SampleEnum.Two_B, EnumConvertSample.SampleEnum.Three_C, EnumConvertSample.SampleEnum.Four_D };
 
     public static SampleEnum ToSampleEnum(this int type)
@@ -242,14 +246,18 @@ public static partial class SampleEnumExtensions
         };
     }
 
+	private static readonly string[] ___One_A_Aliases = {  };
+	private static readonly string[] ___Two_B_Aliases = { "2", "二", "Ⅱ", "弐" };
+	private static readonly string[] ___Three_C_Aliases = {  };
+	private static readonly string[] ___Four_D_Aliases = {  };
     public static string[] ToAliases(this SampleEnum type)
     {
         return type switch
         {
-			EnumConvertSample.SampleEnum.One_A => new string[]{  },
-			EnumConvertSample.SampleEnum.Two_B => new string[]{ "2", "二", "Ⅱ", "弐" },
-			EnumConvertSample.SampleEnum.Three_C => new string[]{  },
-			EnumConvertSample.SampleEnum.Four_D => new string[]{  },
+			EnumConvertSample.SampleEnum.One_A => ___One_A_Aliases,
+			EnumConvertSample.SampleEnum.Two_B => ___Two_B_Aliases,
+			EnumConvertSample.SampleEnum.Three_C => ___Three_C_Aliases,
+			EnumConvertSample.SampleEnum.Four_D => ___Four_D_Aliases,
             _ => throw new ArgumentException($"Invalid parameter. : {type}(SampleEnum)"),
         };
     }
